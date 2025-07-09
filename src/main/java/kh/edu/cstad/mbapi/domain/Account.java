@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,9 +25,6 @@ public class Account {
 
     @Column(unique = true, nullable = false, length = 16, updatable = false)
     private String accountNumber;
-
-    @Column(nullable = false, length = 16)
-    private String accountType;
 
     @Column(nullable = false, length = 16)
     private String accountCurrency;
