@@ -37,4 +37,16 @@ public class Account {
     @Column(nullable = false)
     private Boolean isDeleted;
 
+    @ManyToOne
+    @JoinColumn(name = "account_type_id")
+    private AccountType accountType;
+
+    @Column
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<Transaction> senderTransactions;
+
+    @Column
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    List<Transaction> receiverTransactions;
+
 }
