@@ -18,6 +18,12 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    @GetMapping
+    public List<CustomerResponse> getAllCustomers() {
+        return customerService.findAllCustomers();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CustomerResponse createCustomer(@Valid @RequestBody CreateCustomerRequest createCustomerRequest) {
         return customerService.createNew(createCustomerRequest);
