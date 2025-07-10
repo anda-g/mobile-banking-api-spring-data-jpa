@@ -53,4 +53,17 @@ public class CustomerServiceImpl implements CustomerService {
                 .phoneNumber(customer.getPhoneNumber())
                 .remark(customer.getRemark()).build();
     }
+
+    @Override
+    public List<CustomerResponse> findAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        return customers.stream().map(
+                c -> CustomerResponse.builder()
+                        .fullName(c.getFullName())
+                        .gender(c.getGender())
+                        .email(c.getEmail())
+                        .phoneNumber(c.getPhoneNumber())
+                        .remark(c.getRemark()).build()
+        ).toList();
+    }
 }
