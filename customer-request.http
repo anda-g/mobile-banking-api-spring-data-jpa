@@ -1,0 +1,17 @@
+# === GET ALL CUSTOMERS === #
+###
+GET http://localhost:8080/api/v1/customers
+###
+
+# === CREATE A NEW CUSTOMER === #
+POST http://localhost:8080/api/v1/customers
+Content-Type: application/json
+
+{
+  "fullName": "Anda",
+  "gender": "Male",
+  "email": "kungsovannda@gmail.com",
+  "phoneNumber": "010791566",
+  "remark": "No remark right here"
+}
+###

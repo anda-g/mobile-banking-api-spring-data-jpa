@@ -6,10 +6,10 @@ import kh.edu.cstad.mbapi.dto.CreateCustomerRequest;
 import kh.edu.cstad.mbapi.dto.CustomerResponse;
 import kh.edu.cstad.mbapi.service.CustomerService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/customers")
@@ -27,5 +27,11 @@ public class CustomerController {
     @PostMapping
     public CustomerResponse createCustomer(@Valid @RequestBody CreateCustomerRequest createCustomerRequest) {
         return customerService.createNew(createCustomerRequest);
+    }
+
+    @ResponseStatus(HttpStatus.FOUND)
+    @GetMapping("/{phoneNumber}")
+    public CustomerResponse findByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
+        return customerService.findByPhoneNumber(phoneNumber);
     }
 }
