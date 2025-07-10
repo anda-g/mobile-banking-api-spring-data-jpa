@@ -36,6 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setFullName(createCustomerRequest.fullName());
         customer.setGender(createCustomerRequest.gender());
         customer.setRemark(createCustomerRequest.remark());
+        customer.setPhoneNumber(createCustomerRequest.phoneNumber());
+        customer.setEmail(createCustomerRequest.email());
         customer.setIsDeleted(false);
         customer.setAccounts(new ArrayList<>());
 
