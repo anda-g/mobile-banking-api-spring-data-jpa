@@ -39,4 +39,10 @@ public class CustomerController {
     public CustomerResponse updateCustomer(@PathVariable String phoneNumber,@RequestBody UpdateCustomerRequest updateCustomerRequest) {
         return customerService.updateByPhoneNumber(phoneNumber, updateCustomerRequest);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{phoneNumber}")
+    public void deleteByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
+        customerService.deleteByPhoneNumber(phoneNumber);
+    }
 }
