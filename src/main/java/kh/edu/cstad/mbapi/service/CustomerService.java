@@ -29,4 +29,11 @@ public interface CustomerService {
      */
     CustomerResponse findByPhoneNumber(String phoneNumber);
 
+    /**
+     * @author Anda
+     * @param phoneNumber customer's phone number to search for updating
+     * @param updateCustomerRequest new information of customer for updating
+     * @return customer response after updated success
+     */
+    CustomerResponse updateByPhoneNumber(String phoneNumber, UpdateCustomerRequest updateCustomerRequest);
 }
