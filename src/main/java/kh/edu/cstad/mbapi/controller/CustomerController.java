@@ -34,4 +34,9 @@ public class CustomerController {
     public CustomerResponse findByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
         return customerService.findByPhoneNumber(phoneNumber);
     }
+
+    @PatchMapping("/{phoneNumber}")
+    public CustomerResponse updateCustomer(@PathVariable String phoneNumber,@RequestBody UpdateCustomerRequest updateCustomerRequest) {
+        return customerService.updateByPhoneNumber(phoneNumber, updateCustomerRequest);
+    }
 }
