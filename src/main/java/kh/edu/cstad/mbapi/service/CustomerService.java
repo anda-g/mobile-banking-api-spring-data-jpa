@@ -36,4 +36,11 @@ public interface CustomerService {
      * @return customer response after updated success
      */
     CustomerResponse updateByPhoneNumber(String phoneNumber, UpdateCustomerRequest updateCustomerRequest);
+
+    /**
+     * Delete the existing customer in the database by phone number
+     * @author Anda
+     * @param phoneNumber customer's phone number to search for deleting
+     */
+    void deleteByPhoneNumber(String phoneNumber);
 }
