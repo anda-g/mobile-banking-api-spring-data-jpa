@@ -12,4 +12,7 @@ public interface CustomerMapper {
 
     CustomerResponse fromCustomer(Customer customer);
     Customer toCustomer(CreateCustomerRequest createCustomerRequest);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void toCustomerPartially(UpdateCustomerRequest updateCustomerRequest, @MappingTarget Customer customer);
 }
