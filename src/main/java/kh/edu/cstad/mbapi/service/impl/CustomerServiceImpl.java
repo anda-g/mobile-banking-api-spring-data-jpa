@@ -50,4 +50,20 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(customerMapper::fromCustomer)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone number not found"));
     }
+
+    @Override
+    public CustomerResponse updateByPhoneNumber(String phoneNumber, UpdateCustomerRequest updateCustomerRequest) {
+        Customer customer = customerRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone number not found"));
+        customerMapper.toCustomerPartially(updateCustomerRequest, customer);
+        return customerMapper.fromCustomer(customerRepository.save(customer));
+
+    }
+
+    @Override
+    public void deleteByPhoneNumber(String phoneNumber) {
+        Customer customer = customerRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone number not found"));
+        customerRepository.delete(customer);
+    }
 }
