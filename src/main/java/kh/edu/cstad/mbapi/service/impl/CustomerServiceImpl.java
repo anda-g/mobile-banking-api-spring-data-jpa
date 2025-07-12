@@ -3,6 +3,7 @@ package kh.edu.cstad.mbapi.service.impl;
 import kh.edu.cstad.mbapi.domain.Customer;
 import kh.edu.cstad.mbapi.dto.CreateCustomerRequest;
 import kh.edu.cstad.mbapi.dto.CustomerResponse;
+import kh.edu.cstad.mbapi.dto.UpdateCustomerRequest;
 import kh.edu.cstad.mbapi.mapper.CustomerMapper;
 import kh.edu.cstad.mbapi.repository.CustomerRepository;
 import kh.edu.cstad.mbapi.service.CustomerService;
@@ -25,7 +26,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse createNew(CreateCustomerRequest createCustomerRequest) {
-
         if (customerRepository.existsByEmail(createCustomerRequest.email())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
         } else if (customerRepository.existsByPhoneNumber(createCustomerRequest.phoneNumber())) {

@@ -1,17 +1,37 @@
 # === GET ALL CUSTOMERS === #
 ###
-GET http://localhost:8080/api/v1/customers
+GET {{base_api_url}}/customers
 ###
 
 # === CREATE A NEW CUSTOMER === #
-POST http://localhost:8080/api/v1/customers
+POST {{base_api_url}}/customers
 Content-Type: application/json
 
 {
   "fullName": "Anda",
   "gender": "Male",
-  "email": "kungsovannda@gmail.com",
+  "email": "anda@gmail.com",
   "phoneNumber": "010791566",
   "remark": "No remark right here"
 }
+###
+
+
+# === GET A CUSTOMER BY ITS PHONE NUMBER === #
+GET {{base_api_url}}/customers/010791566
+###
+
+
+# === UPDATE ANY FIELDS OF CUSTOMER === #
+PATCH {{base_api_url}}/customers/010791566
+Content-Type: application/json
+
+{
+  "fullName": "Kung Sovannda"
+}
+
+###
+
+# === DELETE A CUSTOMER BY PHONE NUMBER === #
+DELETE {{base_api_url}}/customers/010791566
 ###

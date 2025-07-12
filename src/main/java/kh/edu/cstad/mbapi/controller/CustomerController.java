@@ -4,6 +4,7 @@ package kh.edu.cstad.mbapi.controller;
 import jakarta.validation.Valid;
 import kh.edu.cstad.mbapi.dto.CreateCustomerRequest;
 import kh.edu.cstad.mbapi.dto.CustomerResponse;
+import kh.edu.cstad.mbapi.dto.UpdateCustomerRequest;
 import kh.edu.cstad.mbapi.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
