@@ -1,4 +1,9 @@
 package kh.edu.cstad.mbapi.dto;
 
-public record UpdateAccountRequest() {
+import java.math.BigDecimal;
+
+public record UpdateAccountRequest(
+        String accountCurrency,
+        BigDecimal balance
+) {
 }

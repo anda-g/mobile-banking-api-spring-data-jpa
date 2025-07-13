@@ -19,7 +19,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
 
@@ -29,7 +29,7 @@ public class Account {
     @Column(nullable = false, length = 16)
     private String accountCurrency;
 
-    @Column(nullable = false, columnDefinition = "MONEY")
+    @Column(nullable = false, columnDefinition = "DECIMAL", precision = 15, scale = 2)
     private BigDecimal balance;
 
     @Column(nullable = false)

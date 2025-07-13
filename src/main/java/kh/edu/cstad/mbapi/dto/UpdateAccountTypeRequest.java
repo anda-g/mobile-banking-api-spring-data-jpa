@@ -1,4 +1,7 @@
 package kh.edu.cstad.mbapi.dto;
 
-public class UpdateAccountTypeRequest {
+public record UpdateAccountTypeRequest (
+        String name,
+        String description
+) {
 }
