@@ -40,10 +40,13 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Account> accounts;
 
-//    @OneToOne
+    //    @OneToOne
 //    @JoinColumn(unique = true, nullable = false)
 //    private KYC kyc;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private KYC kyc;
+
+
+    @ManyToOne
+    private CustomerSegment customerSegment;
 }

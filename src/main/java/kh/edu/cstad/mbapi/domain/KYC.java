@@ -12,7 +12,7 @@ import lombok.*;
 public class KYC {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; /* uuid */
 
     @Column(unique = true, nullable = false)
@@ -28,8 +28,8 @@ public class KYC {
 //    private Customer customer;
 
     @OneToOne
-    @MapsId("id")
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
 
 }

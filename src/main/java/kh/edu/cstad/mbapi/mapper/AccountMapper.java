@@ -11,6 +11,7 @@ public interface AccountMapper {
 
     @Mapping(source = "customerPhoneNumber", target = "customer", qualifiedByName = "mapCustomer")
     @Mapping(source = "accountTypeId", target = "accountType", qualifiedByName = "mapAccountType")
+    @Mapping(source = "customerPhoneNumber", target = "overLimit", qualifiedByName = "mapOverLimit")
     Account toAccount(CreateAccountRequest createAccountRequest);
 
     @Mapping(source = "customer", target = "customerPhoneNumber", qualifiedByName = "mapCustomerPhoneNumber")

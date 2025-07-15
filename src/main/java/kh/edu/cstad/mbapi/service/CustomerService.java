@@ -44,4 +44,10 @@ public interface CustomerService {
      * @param phoneNumber customer's phone number to search for deleting
      */
     void deleteByPhoneNumber(String phoneNumber);
+
+    void disableByPhoneNumber(String phoneNumber);
+
+    void verifyKycByPhoneNumber(String phoneNumber);
+
+
 }

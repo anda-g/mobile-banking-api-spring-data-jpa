@@ -39,6 +39,9 @@ public class Account {
     @JoinColumn(name = "account_type_id")
     private AccountType accountType;
 
+    @Column(nullable = false, columnDefinition = "DECIMAL", precision = 15, scale = 2)
+    private BigDecimal overLimit;
+
     @Column
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Transaction> senderTransactions;

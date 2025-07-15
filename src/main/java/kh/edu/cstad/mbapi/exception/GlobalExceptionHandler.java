@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         ErrorResponse<String> response = ErrorResponse.<String>builder()
                 .message("Invalid request body. Please check your input format and types.")
                 .details(ex.getMessage())
-                .status(400)
+                .status(HttpStatus.BAD_REQUEST.value())
                 .timestamp(LocalDateTime.now())
                 .build();
         return ResponseEntity.badRequest().body(response);

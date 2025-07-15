@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+
 @Component
 @AllArgsConstructor
 public class MapperHelper {
@@ -19,7 +21,7 @@ public class MapperHelper {
 
     @Named("mapCustomer")
     public Customer mapCustomer(String customerPhoneNumber){
-        return customerRepository.findByPhoneNumber(customerPhoneNumber)
+        return customerRepository.findByPhoneNumberAndIsDeletedFalse(customerPhoneNumber)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer not found"));
     }
 
@@ -37,5 +39,12 @@ public class MapperHelper {
     @Named("mapAccountTypeId")
     public Integer mapAccountTypeId(AccountType accountType){
         return accountType.getId();
+    }
+
+    @Named("mapOverLimit")
+    public BigDecimal mapOverLimit(String customerPhoneNumber){
+        Customer customer = customerRepository.findByPhoneNumberAndIsDeletedFalse(customerPhoneNumber)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer not found"));
+        return customer.getCustomerSegment().getBenefit();
     }
 }

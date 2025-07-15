@@ -46,4 +46,16 @@ public class CustomerController {
     public void deleteByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
         customerService.deleteByPhoneNumber(phoneNumber);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{phoneNumber}")
+    public void disableByPhoneNumber(@PathVariable String phoneNumber) {
+        customerService.disableByPhoneNumber(phoneNumber);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{phoneNumber}/verify")
+    public void verifyKycByPhoneNumber(@PathVariable String phoneNumber) {
+        customerService.verifyKycByPhoneNumber(phoneNumber);
+    }
 }
