@@ -20,7 +20,7 @@ public class CustomerSegment {
     private Integer id;
 
     @Column(nullable = false)
-    private String name;
+    private String segment;
 
     @Column(nullable = false, precision = 10, scale = 2, columnDefinition = "DECIMAL")
     private BigDecimal benefit;

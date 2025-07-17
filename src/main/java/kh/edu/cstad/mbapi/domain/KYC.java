@@ -12,24 +12,26 @@ import lombok.*;
 public class KYC {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; /* uuid */
 
     @Column(unique = true, nullable = false)
     private String nationalCardId;
 
     @Column(nullable = false)
-    private Boolean isVerify;
+    private Boolean isVerified;
 
     @Column(nullable = false)
     private Boolean isDeleted;
 
-//    @OneToOne(mappedBy = "kyc")
-//    private Customer customer;
-
     @OneToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @MapsId
+    @JoinColumn(name = "id")
     private Customer customer;
+
+//    @OneToOne
+//    @JoinColumn(name = "customer_id", nullable = false)
+//    private Customer customer;
 
 
 }

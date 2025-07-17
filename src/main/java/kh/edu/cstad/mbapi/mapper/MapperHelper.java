@@ -2,8 +2,10 @@ package kh.edu.cstad.mbapi.mapper;
 
 import kh.edu.cstad.mbapi.domain.AccountType;
 import kh.edu.cstad.mbapi.domain.Customer;
+import kh.edu.cstad.mbapi.domain.CustomerSegment;
 import kh.edu.cstad.mbapi.repository.AccountTypeRepository;
 import kh.edu.cstad.mbapi.repository.CustomerRepository;
+import kh.edu.cstad.mbapi.repository.CustomerSegmentRepository;
 import lombok.AllArgsConstructor;
 import org.mapstruct.Named;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ public class MapperHelper {
 
     private final CustomerRepository customerRepository;
     private final AccountTypeRepository accountTypeRepository;
+    private final CustomerSegmentRepository customerSegmentRepository;
 
     @Named("mapCustomer")
     public Customer mapCustomer(String customerPhoneNumber){

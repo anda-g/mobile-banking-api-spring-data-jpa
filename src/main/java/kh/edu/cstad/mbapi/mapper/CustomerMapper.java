@@ -4,12 +4,9 @@ import kh.edu.cstad.mbapi.domain.Customer;
 import kh.edu.cstad.mbapi.dto.CreateCustomerRequest;
 import kh.edu.cstad.mbapi.dto.CustomerResponse;
 import kh.edu.cstad.mbapi.dto.UpdateCustomerRequest;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = MapperHelper.class)
 public interface CustomerMapper {
 
 //    === TELL EM WHAT YOU WANT TO MAP ===
@@ -28,6 +25,7 @@ public interface CustomerMapper {
      * @param createCustomerRequest a set of data for creating domain customer
      * @return domain model <code>Customer</code>
      */
+    @Mapping(source = "segment", target = "customerSegment", qualifiedByName = "mapCustomerSegment")
     Customer toCustomer(CreateCustomerRequest createCustomerRequest);
 
     /**

@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -26,6 +28,18 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountResponse createNew(CreateAccountRequest createAccountRequest) {
+
+        HashMap<String, BigDecimal> currencyBalance = new HashMap<>();
+        currencyBalance.put("USD", new BigDecimal(10));
+        currencyBalance.put("KHR", new BigDecimal(40000));
+
+        if(currencyBalance.get(createAccountRequest.accountCurrency()) == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Currency not found");
+        }
+
+        if(createAccountRequest.balance().compareTo(currencyBalance.get(createAccountRequest.accountCurrency())) < 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient funds");
+        }
 
         Account account = accountMapper.toAccount(createAccountRequest);
         account.setAccountNumber(accountNumberGenerator.generate());

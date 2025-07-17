@@ -43,7 +43,8 @@ public class Customer {
     //    @OneToOne
 //    @JoinColumn(unique = true, nullable = false)
 //    private KYC kyc;
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private KYC kyc;
 
 

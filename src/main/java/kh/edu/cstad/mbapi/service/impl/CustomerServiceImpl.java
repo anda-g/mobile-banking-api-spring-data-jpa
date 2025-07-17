@@ -10,6 +10,7 @@ import kh.edu.cstad.mbapi.dto.UpdateCustomerRequest;
 import kh.edu.cstad.mbapi.mapper.CustomerMapper;
 import kh.edu.cstad.mbapi.repository.CustomerRepository;
 import kh.edu.cstad.mbapi.repository.CustomerSegmentRepository;
+import kh.edu.cstad.mbapi.repository.KYCRepository;
 import kh.edu.cstad.mbapi.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
     private final CustomerSegmentRepository customerSegmentRepository;
+    private final KYCRepository kycRepository;
 
     @Override
     public CustomerResponse createNew(CreateCustomerRequest createCustomerRequest) {
@@ -36,21 +38,21 @@ public class CustomerServiceImpl implements CustomerService {
         } else if (customerRepository.existsByPhoneNumber(createCustomerRequest.phoneNumber())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Phone number already exists");
         }
+        if(kycRepository.existsByNationalCardId(createCustomerRequest.nationalCardId())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "National card already exists");
+        }
 
         KYC kyc = new KYC();
         kyc.setIsDeleted(false);
-        kyc.setIsVerify(false);
+        kyc.setIsVerified(false);
         kyc.setNationalCardId(createCustomerRequest.nationalCardId());
 
         Customer customer = customerMapper.toCustomer(createCustomerRequest);
         customer.setIsDeleted(false);
         customer.setAccounts(new ArrayList<>());
         customer.setKyc(kyc);
-        CustomerSegment segment = customerSegmentRepository.findById(createCustomerRequest.segmentId()).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Segment not found")
-        );
-        customer.setCustomerSegment(segment);
         kyc.setCustomer(customer);
+
         return customerMapper.fromCustomer(customerRepository.save(customer));
     }
 
@@ -96,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void verifyKycByPhoneNumber(String phoneNumber) {
         Customer customer = customerRepository.findByPhoneNumberAndIsDeletedFalse(phoneNumber)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone number not found"));
-        customer.getKyc().setIsVerify(true);
+        customer.getKyc().setIsVerified(true);
         customerRepository.save(customer);
     }
 }

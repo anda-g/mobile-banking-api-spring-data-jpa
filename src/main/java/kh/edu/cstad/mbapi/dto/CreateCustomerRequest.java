@@ -18,7 +18,7 @@ public record CreateCustomerRequest(
         @NotNull(message = "National card id is required")
         String nationalCardId,
 
-        @NotNull(message = "Segment id is required")
-        Integer segmentId
+        @NotNull(message = "Segment is required")
+        String segment
 ) {
 }
