@@ -47,4 +47,11 @@ public class MapperHelper {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer not found"));
         return customer.getCustomerSegment().getBenefit();
     }
+
+    @Named("mapCustomerSegment")
+    public CustomerSegment mapCustomerSegment(String segment){
+        return customerSegmentRepository.findBySegment(segment).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer segment not found")
+        );
+    }
 }
