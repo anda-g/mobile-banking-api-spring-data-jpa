@@ -15,4 +15,6 @@ public class MediaConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/media/**")
                 .addResourceLocations("file:"+serverPath);
     }
+
+    
 }

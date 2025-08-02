@@ -41,6 +41,7 @@ public class KeycloakSecurityConfig {
                 .requestMatchers(HttpMethod.GET,"/api/v1/customers/**").permitAll()
                 .requestMatchers("/api/v1/accounts/**").hasAnyRole(ROLE_ADMIN, ROLE_STAFF, ROLE_CUSTOMER)
                 .requestMatchers("/media/**").permitAll()
+                .requestMatchers("/api/v1/medias/download/**").permitAll()
                 .anyRequest()
                 .authenticated()
         );
