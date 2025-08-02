@@ -21,4 +21,20 @@ public class MediaController {
     public MediaResponse upload(@RequestPart MultipartFile file) {
         return mediaService.upload(file);
     }
+
+
+    @GetMapping("/download/{filename:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String filename) throws MalformedURLException {
+        Path filePath = Paths.get(serverPath).resolve(filename).normalize();
+        Resource resource = new UrlResource(filePath.toUri());
+
+        if (!resource.exists() || !resource.isReadable()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
 }
